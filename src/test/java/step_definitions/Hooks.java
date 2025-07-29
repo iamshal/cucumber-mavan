@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import java.nio.file.Paths;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -22,9 +23,16 @@ public class Hooks{
      * shared state between tests
      */
     public void openBrowser() throws MalformedURLException {
-    	System.out.println("Called openBrowser");
-    	System.setProperty("webdriver.chrome.driver","C:\\Users\\123\\workspace\\pallaviCucumber\\src\\test\\resources\\executables\\chromedriver.exe");
-    	driver = new ChromeDriver();
+        System.out.println("Called openBrowser");
+        String driverPath = Paths.get(
+                System.getProperty("user.dir"),
+                "src",
+                "test",
+                "resources",
+                "executables",
+                "chromedriver.exe").toString();
+        System.setProperty("webdriver.chrome.driver", driverPath);
+        driver = new ChromeDriver();
     	driver.manage().deleteAllCookies();
     	driver.manage().window().maximize();
     }
